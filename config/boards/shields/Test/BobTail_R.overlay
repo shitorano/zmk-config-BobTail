@@ -24,17 +24,16 @@
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
 
-        /* 1 = Y軸のみ */
+        /* Y軸 */
         axis = <1>;
 
         /* Layer 5 */
         layer = <5>;
 
-        /* 後段の scroll scaler と一致 */
         scale = <4>;
         scale-div = <675>;
 
-        /* 慣性の停止判定 */
+        /* 慣性スクロールの停止判定 */
         stop = <7>;
     };
 
@@ -47,17 +46,16 @@
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
 
-        /* 2 = X軸のみ */
+        /* X軸 */
         axis = <2>;
 
         /* Layer 7 */
         layer = <7>;
 
-        /* 後段の scroll scaler と一致 */
         scale = <4>;
         scale-div = <675>;
 
-        /* 慣性の停止判定 */
+        /* 慣性スクロールの停止判定 */
         stop = <7>;
     };
 
@@ -79,10 +77,10 @@
             layers = <5>;
 
             input-processors = <
-                /* Y軸の方向を反転 */
+                /* Y軸方向を反転 */
                 &zip_y_scaler (-1) 1
 
-                /* XY入力をスクロール入力へ変換 */
+                /* XY入力 → スクロール入力 */
                 &zip_xy_to_scroll_mapper
 
                 /* 慣性 */
@@ -102,7 +100,7 @@
             layers = <7>;
 
             input-processors = <
-                /* XY入力をスクロール入力へ変換 */
+                /* XY入力 → スクロール入力 */
                 &zip_xy_to_scroll_mapper
 
                 /* 慣性 */
