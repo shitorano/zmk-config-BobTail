@@ -16,42 +16,6 @@
 };
 
 / {
-    /* 縦スクロール用の慣性プロセッサ */
-    scroll_inertia_v: scroll_inertia_v {
-        compatible = "zmk,input-processor-scroll-inertia";
-        #input-processor-cells = <0>;
-
-        axis = <1>;
-        layer = <5>;
-
-        scale = <4>;
-        scale-div = <675>;
-
-        /* 慣性スクロール終了時の滑らかさ */
-        stop = <7>;
-
-        /* 動き始めの反応を速くする */
-        start = <25>;
-        move = <50>;
-    };
-
-    /* 横スクロール用の慣性プロセッサ */
-    scroll_inertia_h: scroll_inertia_h {
-        compatible = "zmk,input-processor-scroll-inertia";
-        #input-processor-cells = <0>;
-
-        axis = <2>;
-        layer = <7>;
-
-        scale = <4>;
-        scale-div = <675>;
-
-        stop = <7>;
-
-        start = <25>;
-        move = <50>;
-    };
-
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
@@ -63,7 +27,6 @@
             input-processors = <
                 &zip_y_scaler (-1) 1
                 &zip_xy_to_scroll_mapper
-                &scroll_inertia_v
                 &zip_scroll_scaler 4 675
             >;
         };
@@ -74,7 +37,6 @@
 
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &scroll_inertia_h
                 &zip_scroll_scaler 4 675
             >;
         };
