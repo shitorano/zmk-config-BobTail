@@ -12,12 +12,12 @@
         gain = <400>;
         blend = <600>;
 
-        start = <30>;
+        start = <35>;
         move = <80>;
         release = <24>;
 
         scale = <4>;
-        scale-div = <675>;
+        scale-div = <600>;
 
         stop = <7>;
         tick = <8>;
@@ -33,12 +33,12 @@
         gain = <400>;
         blend = <600>;
 
-        start = <30>;
+        start = <35>;
         move = <80>;
         release = <24>;
 
         scale = <4>;
-        scale-div = <675>;
+        scale-div = <600>;
 
         stop = <7>;
         tick = <8>;
@@ -55,7 +55,7 @@
                 &zip_y_scaler (-1) 1
                 &zip_xy_to_scroll_mapper
                 &scroll_inertia_v
-                &zip_scroll_scaler 4 675
+                &zip_scroll_scaler 4 600
             >;
         };
 
@@ -65,7 +65,7 @@
             input-processors = <
                 &zip_xy_to_scroll_mapper
                 &scroll_inertia_h
-                &zip_scroll_scaler 4 675
+                &zip_scroll_scaler 4 600
             >;
         };
     };
