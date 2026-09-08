@@ -34,7 +34,7 @@
         scale-div = <675>;
     };
 
-    /* トラックボールのイベントリスナー構造を修正 */
+    /* トラックボールのイベントリスナー構造 */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
@@ -43,7 +43,6 @@
         scroller_v {
             layers = <5>;
             input-processors = <
-                &zip_y_scaler (-1) 1
                 &zip_xy_to_scroll_mapper
                 &scroll_inertia_v
                 &zip_scroll_scaler 4 675
