@@ -18,6 +18,7 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+        input-processors = <&scroll_inertia_v>, <&scroll_inertia_h>;
     };
 };
 
@@ -57,7 +58,6 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         automouse-layer = <4>;
-        scroll-layers = <5 7>; /* レイヤー5と7をスクロール対象に指定 */
     };
 };
 
@@ -74,7 +74,7 @@
     scroll_inertia_h: scroll_inertia_h {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
-        axis = <2>; /* 2 = 横スクロール専用 */
+        axis = <2>; /* 2 = 横スクロール */
         layer = <7>; /* レイヤー7 */
         scale = <4>;
         scale-div = <675>;
