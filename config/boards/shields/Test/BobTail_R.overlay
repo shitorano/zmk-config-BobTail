@@ -16,7 +16,7 @@
 };
 
 / {
-    /* 慣性スクロール・プロセッサ */
+    /* 縦スクロール用の慣性プロセッサ */
     scroll_inertia_v: scroll_inertia_v {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
@@ -27,7 +27,7 @@
         scale = <4>;
         scale-div = <675>;
 
-        /* スクロール停止判定 */
+        /* 慣性スクロール終了時の滑らかさ */
         stop = <7>;
 
         /* 動き始めの反応を速くする */
@@ -35,6 +35,7 @@
         move = <50>;
     };
 
+    /* 横スクロール用の慣性プロセッサ */
     scroll_inertia_h: scroll_inertia_h {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
@@ -47,7 +48,6 @@
 
         stop = <7>;
 
-        /* 動き始めの反応を速くする */
         start = <25>;
         move = <50>;
     };
@@ -56,6 +56,7 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
+        /* レイヤー5：縦スクロール */
         scroller_v {
             layers = <5>;
 
@@ -67,6 +68,7 @@
             >;
         };
 
+        /* レイヤー7：横スクロール */
         scroller_h {
             layers = <7>;
 
@@ -116,8 +118,11 @@
         status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;
+
         spi-max-frequency = <2000000>;
+
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+
         automouse-layer = <4>;
     };
 };
