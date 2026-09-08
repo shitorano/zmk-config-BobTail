@@ -13,8 +13,8 @@
     quick-tap-ms = <0>;
 };
 
-/* --- 慣性スクロールプロセッサの定義 --- */
 / {
+    /* 慣性スクロールプロセッサの定義 */
     scroll_inertia_v: scroll_inertia_v {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
@@ -23,9 +23,7 @@
         scale = <4>;
         scale-div = <675>;
     };
-};
 
-/ {
     combos {
         compatible = "zmk,combos";
 
@@ -142,8 +140,20 @@
     };
 };
 
-/* --- トラックボールリスナーへの設定追加 --- */
-&trackball_listener {
+/* トラックボールリスナーへの割り当て（左右両方のノードに対応） */
+&trackball_listener_L {
+    scroller_v {
+        layers = <SCROLL>;
+        input-processors = <
+            &zip_y_scaler (-1) 1
+            &zip_xy_to_scroll_mapper
+            &scroll_inertia_v
+            &zip_scroll_scaler 4 675
+        >;
+    };
+};
+
+&trackball_listener_R {
     scroller_v {
         layers = <SCROLL>;
         input-processors = <
