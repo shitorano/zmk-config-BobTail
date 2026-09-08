@@ -18,7 +18,6 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&scroll_inertia_v>, <&scroll_inertia_h>;
     };
 };
 
@@ -69,7 +68,6 @@
         layer = <5>; /* レイヤー5 */
         scale = <4>;
         scale-div = <675>;
-        processor = <&zip_xy_to_scroll_mapper>;
     };
 
     scroll_inertia_h: scroll_inertia_h {
@@ -79,6 +77,5 @@
         layer = <7>; /* レイヤー7 */
         scale = <4>;
         scale-div = <675>;
-        processor = <&zip_xy_to_scroll_mapper>;
     };
 };
