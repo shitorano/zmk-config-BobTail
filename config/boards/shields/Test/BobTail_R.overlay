@@ -17,37 +17,48 @@
 
 / {
     /* ========================================
-     * 慣性スクロール・プロセッサ
+     * 縦スクロール：慣性プロセッサ
      * ======================================== */
 
     scroll_inertia_v: scroll_inertia_v {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
 
-        /* 1 = 縦スクロール */
+        /* 1 = Y軸のみ */
         axis = <1>;
 
         /* Layer 5 */
         layer = <5>;
 
-        /* zip_scroll_scaler 4 675 と一致させる */
+        /* 後段の scroll scaler と一致 */
         scale = <4>;
         scale-div = <675>;
+
+        /* 慣性の停止判定 */
+        stop = <7>;
     };
+
+
+    /* ========================================
+     * 横スクロール：慣性プロセッサ
+     * ======================================== */
 
     scroll_inertia_h: scroll_inertia_h {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
 
-        /* 2 = 横スクロール */
+        /* 2 = X軸のみ */
         axis = <2>;
 
         /* Layer 7 */
         layer = <7>;
 
-        /* zip_scroll_scaler 4 675 と一致させる */
+        /* 後段の scroll scaler と一致 */
         scale = <4>;
         scale-div = <675>;
+
+        /* 慣性の停止判定 */
+        stop = <7>;
     };
 
 
@@ -59,28 +70,45 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* -------------------------------
-         * 縦スクロール Layer 5
-         * ------------------------------- */
+
+        /* ----------------------------------------
+         * Layer 5：縦スクロール
+         * ---------------------------------------- */
+
         scroller_v {
             layers = <5>;
 
             input-processors = <
+                /* Y軸の方向を反転 */
+                &zip_y_scaler (-1) 1
+
+                /* XY入力をスクロール入力へ変換 */
                 &zip_xy_to_scroll_mapper
+
+                /* 慣性 */
                 &scroll_inertia_v
+
+                /* スクロール量 */
                 &zip_scroll_scaler 4 675
             >;
         };
 
-        /* -------------------------------
-         * 横スクロール Layer 7
-         * ------------------------------- */
+
+        /* ----------------------------------------
+         * Layer 7：横スクロール
+         * ---------------------------------------- */
+
         scroller_h {
             layers = <7>;
 
             input-processors = <
+                /* XY入力をスクロール入力へ変換 */
                 &zip_xy_to_scroll_mapper
+
+                /* 慣性 */
                 &scroll_inertia_h
+
+                /* スクロール量 */
                 &zip_scroll_scaler 4 675
             >;
         };
@@ -111,9 +139,11 @@
     };
 };
 
+
 &xiao_serial {
     status = "disabled";
 };
+
 
 &spi0 {
     status = "okay";
@@ -124,6 +154,7 @@
     pinctrl-names = "default", "sleep";
 
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
+
 
     trackball: trackball@0 {
         status = "okay";
