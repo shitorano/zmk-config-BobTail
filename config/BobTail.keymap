@@ -14,16 +14,6 @@
 };
 
 / {
-    /* 慣性スクロールプロセッサの定義 */
-    scroll_inertia_v: scroll_inertia_v {
-        compatible = "zmk,input-processor-scroll-inertia";
-        #input-processor-cells = <0>;
-        axis = <1>; /* 1 = 縦スクロール */
-        layer = <SCROLL>; /* レイヤー5（SCROLL）に適用 */
-        scale = <4>;
-        scale-div = <675>;
-    };
-
     combos {
         compatible = "zmk,combos";
 
