@@ -9,13 +9,18 @@
         axis = <1>;
         layer = <5>;
 
+        gain = <400>;
+        blend = <600>;
+
+        start = <30>;
+        move = <80>;
+        release = <24>;
+
         scale = <4>;
         scale-div = <675>;
 
         stop = <7>;
         tick = <8>;
-
-        start = <30>;
     };
 
     scroll_inertia_h: scroll_inertia_h {
@@ -25,13 +30,18 @@
         axis = <2>;
         layer = <7>;
 
+        gain = <400>;
+        blend = <600>;
+
+        start = <30>;
+        move = <80>;
+        release = <24>;
+
         scale = <4>;
         scale-div = <675>;
 
         stop = <7>;
         tick = <8>;
-
-        start = <30>;
     };
 
     trackball_listener: trackball_listener {
