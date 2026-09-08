@@ -1,5 +1,4 @@
 #include "BobTail.dtsi"
-#include <input/processors.dtsi>
 
 &default_transform {
     col-offset = <6>;
@@ -16,30 +15,9 @@
 };
 
 / {
-    trackball_listener: trackball_listener {
+    trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
-        /* レイヤー5：縦スクロール */
-        scroller_v {
-            layers = <5>;
-
-            input-processors = <
-                &zip_y_scaler (-1) 1
-                &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 4 675
-            >;
-        };
-
-        /* レイヤー7：横スクロール */
-        scroller_h {
-            layers = <7>;
-
-            input-processors = <
-                &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 4 675
-            >;
-        };
     };
 };
 
@@ -69,22 +47,18 @@
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
-
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;
-
         spi-max-frequency = <2000000>;
-
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
         automouse-layer = <4>;
+        scroll-layers = <5>;
     };
 };
