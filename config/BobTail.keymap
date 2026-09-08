@@ -140,7 +140,7 @@
     };
 };
 
-/* na-ka-no氏のリポジトリ構成に合わせたトラックボールリスナー設定 */
+/* リスナー参照名を trackball_split_listener に指定 */
 &trackball_split_listener {
     scroller_v {
         layers = <SCROLL>;
