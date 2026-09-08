@@ -1,4 +1,5 @@
 #include "BobTail.dtsi"
+#include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
     col-offset = <6>;
@@ -15,10 +16,12 @@
 };
 
 / {
+    /* トラックボールの信号処理手順を設定 */
+    /* 1. XY移動をスクロール信号に変換  2. 縦慣性を適用  3. 横慣性を適用 */
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&scroll_inertia_v>, <&scroll_inertia_h>;
+        input-processors = <&zip_xy_to_scroll_mapper>, <&scroll_inertia_v>, <&scroll_inertia_h>;
     };
 };
 
@@ -66,7 +69,7 @@
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
         axis = <1>; /* 1 = 縦スクロール */
-        layer = <5>; /* レイヤー5 */
+        layer = <5>; /* レイヤー5 (SCROLL) */
         scale = <4>;
         scale-div = <675>;
     };
@@ -75,7 +78,7 @@
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
         axis = <2>; /* 2 = 横スクロール */
-        layer = <7>; /* レイヤー7 */
+        layer = <7>; /* レイヤー7 (X_SCROLL) */
         scale = <4>;
         scale-div = <675>;
     };
