@@ -1,4 +1,5 @@
 #include "BobTail.dtsi"
+#include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
     col-offset = <6>;
@@ -18,6 +19,7 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+        input-processors = <&scroll_inertia_v>, <&scroll_inertia_h>;
     };
 };
 
@@ -64,6 +66,7 @@
     scroll_inertia_v: scroll_inertia_v {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
         axis = <1>; /* 1 = 縦スクロール */
         layer = <5>; /* レイヤー5 */
         scale = <4>;
@@ -73,6 +76,7 @@
     scroll_inertia_h: scroll_inertia_h {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
         axis = <2>; /* 2 = 横スクロール */
         layer = <7>; /* レイヤー7 */
         scale = <4>;
