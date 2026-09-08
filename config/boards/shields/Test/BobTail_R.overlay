@@ -1,4 +1,61 @@
 #include "BobTail.dtsi"
+#include <input/processors.dtsi>
+
+/ {
+    scroll_inertia_v: scroll_inertia_v {
+        compatible = "zmk,input-processor-scroll-inertia";
+        #input-processor-cells = <0>;
+
+        axis = <1>;
+        layer = <5>;
+
+        scale = <4>;
+        scale-div = <675>;
+
+        stop = <7>;
+        tick = <8>;
+    };
+
+    scroll_inertia_h: scroll_inertia_h {
+        compatible = "zmk,input-processor-scroll-inertia";
+        #input-processor-cells = <0>;
+
+        axis = <2>;
+        layer = <7>;
+
+        scale = <4>;
+        scale-div = <675>;
+
+        stop = <7>;
+        tick = <8>;
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        scroller_v {
+            layers = <5>;
+
+            input-processors = <
+                &zip_y_scaler (-1) 1
+                &zip_xy_to_scroll_mapper
+                &scroll_inertia_v
+                &zip_scroll_scaler 4 675
+            >;
+        };
+
+        scroller_h {
+            layers = <7>;
+
+            input-processors = <
+                &zip_xy_to_scroll_mapper
+                &scroll_inertia_h
+                &zip_scroll_scaler 4 675
+            >;
+        };
+    };
+};
 
 &default_transform {
     col-offset = <6>;
@@ -12,13 +69,6 @@
         , <&xiao_d 7 GPIO_ACTIVE_HIGH>
         , <&gpio0 10 GPIO_ACTIVE_HIGH>
         ;
-};
-
-/ {
-    trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-    };
 };
 
 &pinctrl {
@@ -59,6 +109,5 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         automouse-layer = <4>;
-        scroll-layers = <5>;
     };
 };
