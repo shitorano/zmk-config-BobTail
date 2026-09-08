@@ -16,12 +16,17 @@
 };
 
 / {
-    /* トラックボールの信号処理手順を設定 */
-    /* 1. XY移動をスクロール信号に変換  2. 縦慣性を適用  3. 横慣性を適用 */
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_xy_to_scroll_mapper>, <&scroll_inertia_v>, <&scroll_inertia_h>;
+        input-processors = <&zip_scroll_mapper>, <&scroll_inertia_v>, <&scroll_inertia_h>;
+    };
+
+    /* XY移動をスクロールイベントへ変換するプロセッサを直接定義 */
+    zip_scroll_mapper: zip_scroll_mapper {
+        compatible = "zmk,input-processor-to-service-type";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
     };
 };
 
