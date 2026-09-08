@@ -140,8 +140,8 @@
     };
 };
 
-/* トラックボールリスナーへの割り当て */
-&trackball_listener {
+/* na-ka-no氏のリポジトリ構成に合わせたトラックボールリスナー設定 */
+&trackball_split_listener {
     scroller_v {
         layers = <SCROLL>;
         input-processors = <
@@ -149,9 +149,6 @@
             &zip_xy_to_scroll_mapper
             &scroll_inertia_v
             &zip_scroll_scaler 4 675
-        >;
-    };
-};
         >;
     };
 };
