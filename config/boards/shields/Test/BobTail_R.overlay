@@ -69,6 +69,7 @@
         layer = <5>; /* レイヤー5 */
         scale = <4>;
         scale-div = <675>;
+        processor = <&zip_xy_to_scroll_mapper>;
     };
 
     scroll_inertia_h: scroll_inertia_h {
@@ -78,5 +79,6 @@
         layer = <7>; /* レイヤー7 */
         scale = <4>;
         scale-div = <675>;
+        processor = <&zip_xy_to_scroll_mapper>;
     };
 };
