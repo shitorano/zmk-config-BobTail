@@ -54,10 +54,10 @@
 
         default_layer {
             bindings = <
-&kp Q      &kp L             &kp U         &kp COMMA       &kp PERIOD                                       &kp F        &kp W            &kp R        &kp Y              &kp P
-&kp E      &mt LEFT_SHIFT I  &mt LCTRL A   &mt LEFT_ALT O  &kp MINUS     &kp F3            &kp PRINTSCREEN  &kp K        &mt RIGHT_ALT T  &mt RCTRL N  &mt RIGHT_SHIFT S  &kp H
-&kp Z      &kp X             &kp C         &kp V           &kp LEFT_WIN  &lt 1 F3          &kp ESC          &kp G        &kp D            &kp M        &kp J              &kp B
-&kp RCTRL  &kp C_MUTE        &kp LEFT_ALT  &kp LEFT_GUI    &lt 2 SPACE   &lt 3 DELETE      &kp BACKSPACE    &lt 1 ENTER                                                   &kp PRINTSCREEN
+&kp Q      &kp L             &kp U         &kp COMMA       &kp PERIOD                                     &kp F        &kp W            &kp R        &kp Y              &kp P
+&kp E      &mt LEFT_SHIFT I  &mt LCTRL A   &mt LEFT_ALT O  &kp MINUS     &kp F3            &trans         &kp K        &mt RIGHT_ALT T  &mt RCTRL N  &mt RIGHT_SHIFT S  &lt 3 H
+&kp Z      &kp X             &kp C         &kp V           &kp LEFT_WIN  &lt 1 F3          &trans         &kp G        &kp D            &kp M        &kp J              &lt 2 B
+&kp RCTRL  &kp C_MUTE        &kp LEFT_ALT  &kp LEFT_GUI    &lt 2 SPACE   &lt 3 DELETE      &kp BACKSPACE  &lt 1 ENTER                                                   &kp LS(LG(N5))
             >;
 
             sensor-bindings = <&encoder_msc_down_up>;
@@ -103,10 +103,10 @@
 
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans          &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &msc MOVE_X(0)  &msc MOVE_Y(0)
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans          &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                  &trans
             >;
         };
 
