@@ -3,31 +3,6 @@
 #include <behaviors/input_gestures_accel.dtsi>
 
 / {
-    /*
-     * カーソル移動用の加速度設定
-     *
-     * ゆっくり動かす
-     * → 0.8倍
-     *
-     * 普通に動かす
-     * → 1倍付近
-     *
-     * 素早く動かす
-     * → 最大3倍
-     */
-    &pointer_accel {
-        input-type = <INPUT_EV_REL>;
-        track-remainders;
-
-        min-factor = <800>;
-        max-factor = <3000>;
-
-        speed-threshold = <1200>;
-        speed-max = <6000>;
-
-        acceleration-exponent = <2>;
-    };
-
     scroll_inertia_v: scroll_inertia_v {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
@@ -75,18 +50,14 @@
         device = <&trackball>;
 
         /*
-         * 通常のカーソル移動だけ加速度を適用
+         * 通常のカーソル移動
          */
         input-processors = <
             &pointer_accel
         >;
 
         /*
-         * Layer 5
-         * 縦スクロール
-         *
-         * この設定が有効な間は
-         * pointer_accel は適用されません。
+         * Layer 5: 縦スクロール
          */
         scroller_v {
             layers = <5>;
@@ -100,11 +71,7 @@
         };
 
         /*
-         * Layer 7
-         * 横スクロール
-         *
-         * この設定が有効な間も
-         * pointer_accel は適用されません。
+         * Layer 7: 横スクロール
          */
         scroller_h {
             layers = <7>;
@@ -116,6 +83,25 @@
             >;
         };
     };
+};
+
+/*
+ * カーソル移動の加速度設定
+ *
+ * 低速時: 0.8倍
+ * 高速時: 最大3倍
+ */
+&pointer_accel {
+    input-type = <INPUT_EV_REL>;
+    track-remainders;
+
+    min-factor = <800>;
+    max-factor = <3000>;
+
+    speed-threshold = <1200>;
+    speed-max = <6000>;
+
+    acceleration-exponent = <2>;
 };
 
 &default_transform {
