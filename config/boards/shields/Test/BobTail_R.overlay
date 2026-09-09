@@ -57,12 +57,17 @@
         >;
 
         /*
-         * Layer 5: 縦スクロール
+         * Layer 5
+         * 縦スクロール
+         *
+         * 加速度 → スクロール変換 → 慣性
          */
         scroller_v {
             layers = <5>;
+            process-next;
 
             input-processors = <
+                &pointer_accel
                 &zip_y_scaler (-1) 1
                 &zip_xy_to_scroll_mapper
                 &scroll_inertia_v
@@ -71,12 +76,17 @@
         };
 
         /*
-         * Layer 7: 横スクロール
+         * Layer 7
+         * 横スクロール
+         *
+         * 加速度 → スクロール変換 → 慣性
          */
         scroller_h {
             layers = <7>;
+            process-next;
 
             input-processors = <
+                &pointer_accel
                 &zip_xy_to_scroll_mapper
                 &scroll_inertia_h
                 &zip_scroll_scaler 4 550
@@ -86,10 +96,13 @@
 };
 
 /*
- * カーソル移動の加速度設定
+ * ポインター加速度
  *
- * 低速時: 0.8倍
- * 高速時: 最大3倍
+ * 通常カーソル:
+ *   低速  0.8倍
+ *   高速  最大3倍
+ *
+ * スクロールにも同じ加速度を実験的に適用
  */
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
