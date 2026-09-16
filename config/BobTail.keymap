@@ -73,7 +73,11 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_SCROLL_H";
             #sensor-binding-cells = <0>;
-            bindings = <&kp RIGHT_ARROW>, <&kp LEFT_ARROW>;
+
+            /* 右回し→左、左回し→右 */
+            /* 縦スクロール80に対して横スクロール160 */
+            bindings = <&msc MOVE_X(-160)>, <&msc MOVE_X(160)>;
+
             tap-ms = <20>;
         };
     };
@@ -140,7 +144,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans      &trans      &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
 
