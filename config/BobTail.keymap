@@ -44,6 +44,7 @@
     };
 
     behaviors {
+
         encoder_scroll_v: encoder_scroll_v {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_SCROLL_V";
@@ -64,7 +65,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_WIN_ZOOM";
             #sensor-binding-cells = <0>;
-            bindings = <&kp LG(SEMI)>, <&kp LG(MINUS)>;
+            bindings = <&kp LG(PLUS)>, <&kp LG(MINUS)>;
             tap-ms = <20>;
         };
 
@@ -139,7 +140,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans      &trans      &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
 
