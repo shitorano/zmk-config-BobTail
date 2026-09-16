@@ -44,11 +44,47 @@
     };
 
     behaviors {
+
+        encoder_msc_down_up: encoder_msc_down_up {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_MSC_DOWN_UP";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+            tap-ms = <20>;
+        };
+
         encoder_scroll_v: encoder_scroll_v {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_SCROLL_V";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+            tap-ms = <20>;
+        };
+
+        encoder_volume: encoder_volume {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_VOLUME";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
+            tap-ms = <20>;
+        };
+
+        encoder_win_zoom: encoder_win_zoom {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_WIN_ZOOM";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp LG(PLUS)>, <&kp LG(MINUS)>;
+            tap-ms = <20>;
+        };
+
+        encoder_scroll_h: encoder_scroll_h {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_SCROLL_H";
+            #sensor-binding-cells = <0>;
+
+            /* 右回し→左、左回し→右 */
+            /* 縦スクロール80に対して横スクロール160 */
+            bindings = <&msc MOVE_X(-160)>, <&msc MOVE_X(160)>;
 
             tap-ms = <20>;
         };
@@ -75,6 +111,8 @@
 &trans  &kp C_MUTE    &kp C_VOL_DN      &kp C_VOL_UP                       &kp COLON      &trans      &trans  &kp N0     &kp N1  &kp N2  &kp N3  &kp EQUAL
 &trans  &trans        &trans            &trans                             &trans         &trans      &trans  &trans                             &kp DOT
             >;
+
+            sensor-bindings = <&encoder_volume>;
         };
 
         SYMBOL {
