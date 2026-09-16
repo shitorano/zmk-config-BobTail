@@ -13,8 +13,8 @@
         gain = <400>;
         blend = <600>;
 
-        start = <45>;
-        move = <80>;
+        start = <60>;
+        move = <90>;
         release = <24>;
 
         scale = <4>;
@@ -34,8 +34,8 @@
         gain = <400>;
         blend = <600>;
 
-        start = <45>;
-        move = <80>;
+        start = <60>;
+        move = <90>;
         release = <24>;
 
         scale = <4>;
@@ -59,10 +59,6 @@
         /*
          * Layer 5
          * 縦スクロール
-         *
-         * pointer_accel
-         * → 縦スクロール変換
-         * → scroll inertia
          */
         scroller_v {
             layers = <5>;
@@ -80,10 +76,6 @@
         /*
          * Layer 7
          * 横スクロール
-         *
-         * pointer_accel
-         * → 横スクロール変換
-         * → scroll inertia
          */
         scroller_h {
             layers = <7>;
@@ -102,20 +94,11 @@
 /*
  * ポインター加速度
  *
- * 低速時:
- *   0.7倍
- *
- * 高速時:
- *   最大3倍
+ * 低速時: 0.7倍
+ * 高速時: 最大3倍
  *
  * 900 counts/sec から加速開始
  * 7000 counts/sec で最大加速
- *
- * exponent = 2
- * → 二次曲線
- *
- * track-remainders
- * → 小さな端数を保持して精密な移動を維持
  */
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
