@@ -60,7 +60,9 @@
          * Layer 5
          * 縦スクロール
          *
-         * 加速度 → スクロール変換 → 慣性
+         * pointer_accel
+         * → 縦スクロール変換
+         * → scroll inertia
          */
         scroller_v {
             layers = <5>;
@@ -79,7 +81,9 @@
          * Layer 7
          * 横スクロール
          *
-         * 加速度 → スクロール変換 → 慣性
+         * pointer_accel
+         * → 横スクロール変換
+         * → scroll inertia
          */
         scroller_h {
             layers = <7>;
@@ -98,21 +102,30 @@
 /*
  * ポインター加速度
  *
- * 通常カーソル:
- *   低速  0.8倍
- *   高速  最大3倍
+ * 低速時:
+ *   0.7倍
  *
- * スクロールにも同じ加速度を実験的に適用
+ * 高速時:
+ *   最大3倍
+ *
+ * 900 counts/sec から加速開始
+ * 7000 counts/sec で最大加速
+ *
+ * exponent = 2
+ * → 二次曲線
+ *
+ * track-remainders
+ * → 小さな端数を保持して精密な移動を維持
  */
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     track-remainders;
 
-    min-factor = <800>;
+    min-factor = <700>;
     max-factor = <3000>;
 
-    speed-threshold = <1200>;
-    speed-max = <6000>;
+    speed-threshold = <900>;
+    speed-max = <7000>;
 
     acceleration-exponent = <2>;
 };
