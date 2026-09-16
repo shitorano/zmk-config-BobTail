@@ -1,3 +1,4 @@
+```dts
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
@@ -44,12 +45,31 @@
     };
 
     behaviors {
-        encoder_msc_down_up: encoder_msc_down_up {
+
+        /* 通常の縦スクロール */
+        encoder_scroll_v: encoder_scroll_v {
             compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_MSC_DOWN_UP";
+            label = "ENCODER_SCROLL_V";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+            tap-ms = <20>;
+        };
 
+        /* 横スクロール */
+        encoder_scroll_h: encoder_scroll_h {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_SCROLL_H";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_RIGHT>, <&msc SCRL_LEFT>;
+            tap-ms = <20>;
+        };
+
+        /* Win + ; / Win + - */
+        encoder_win_zoom: encoder_win_zoom {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_WIN_ZOOM";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp LG(SEMI)>, <&kp LG(MINUS)>;
             tap-ms = <20>;
         };
     };
@@ -57,6 +77,7 @@
     keymap {
         compatible = "zmk,keymap";
 
+        /* Layer 0 */
         default_layer {
             bindings = <
 &kp Q      &kp L             &kp U         &kp COMMA       &kp PERIOD                                     &kp F        &kp W            &kp R        &kp Y              &kp P
@@ -65,9 +86,10 @@
 &kp RCTRL  &kp C_MUTE        &kp LEFT_ALT  &kp LEFT_GUI    &lt 3 SPACE   &lt 2 DELETE      &kp BACKSPACE  &lt 1 ENTER                                                   &kp LS(LG(N5))
             >;
 
-            sensor-bindings = <&encoder_msc_down_up>;
+            sensor-bindings = <&encoder_scroll_v>;
         };
 
+        /* Layer 1 : FUN_NUM */
         FUN_NUM {
             bindings = <
 &kp F4  &kp F1   &kp F2   &kp F3   &kp POUND                      &kp SLASH  &kp N7  &kp N8  &kp N9  &kp MINUS
@@ -75,8 +97,12 @@
 &kp F6  &kp F10  &kp F11  &kp F12  &kp COLON  &trans      &trans  &kp N0     &kp N1  &kp N2  &kp N3  &kp EQUAL
 &trans  &trans   &trans   &trans   &trans     &trans      &trans  &trans                             &kp DOT
             >;
+
+            /* 音量 */
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
+        /* Layer 2 : SYMBOL */
         SYMBOL {
             bindings = <
 &kp EXCL   &kp AT        &kp HASH  &kp DLLR      &kp PRCNT                      &kp CARET  &kp AMPERSAND  &kp STAR  &kp LPAR   &kp RPAR
@@ -84,8 +110,11 @@
 &trans     &kp LS(LBKT)  &kp SQT   &kp LS(RBKT)  &kp SEMI   &trans      &trans  &trans     &trans         &trans    &trans     &trans
 &trans     &trans        &trans    &trans        &trans     &trans      &trans  &trans                                         &trans
             >;
+
+            sensor-bindings = <&encoder_scroll_v>;
         };
 
+        /* Layer 3 : ARROW */
         ARROW {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &kp LS(LG(Z))        &kp LG(Z)       &kp LG(C)       &kp LG(V)        &trans
@@ -94,9 +123,11 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                                                &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
+            /* Win + ; / Win + - */
+            sensor-bindings = <&encoder_win_zoom>;
         };
 
+        /* Layer 4 : MOUSE */
         MOUSE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans    &mo 7   &trans    &trans
@@ -104,8 +135,11 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans  &trans    &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                              &trans
             >;
+
+            sensor-bindings = <&encoder_scroll_v>;
         };
 
+        /* Layer 5 : SCROLL */
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
@@ -113,8 +147,12 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
+
+            /* 横スクロール */
+            sensor-bindings = <&encoder_scroll_h>;
         };
 
+        /* Layer 6 : BLUETOOTH */
         BLUETOOTH {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                          &trans        &trans        &trans        &trans        &trans
@@ -122,8 +160,11 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &bt BT_CLR  &trans                                                  &trans
             >;
+
+            sensor-bindings = <&encoder_scroll_v>;
         };
 
+        /* Layer 7 : X_SCROLL */
         X_SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
@@ -131,6 +172,9 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
+
+            sensor-bindings = <&encoder_scroll_v>;
         };
     };
 };
+```
