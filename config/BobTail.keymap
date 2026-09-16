@@ -44,39 +44,11 @@
     };
 
     behaviors {
-
         encoder_scroll_v: encoder_scroll_v {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_SCROLL_V";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-            tap-ms = <20>;
-        };
-
-        encoder_volume: encoder_volume {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_VOLUME";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
-            tap-ms = <20>;
-        };
-
-        encoder_win_zoom: encoder_win_zoom {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_WIN_ZOOM";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp LG(PLUS)>, <&kp LG(MINUS)>;
-            tap-ms = <20>;
-        };
-
-        encoder_scroll_h: encoder_scroll_h {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_SCROLL_H";
-            #sensor-binding-cells = <0>;
-
-            /* 右回し→左、左回し→右 */
-            /* 縦スクロール80に対して横スクロール160 */
-            bindings = <&msc MOVE_X(-160)>, <&msc MOVE_X(160)>;
 
             tap-ms = <20>;
         };
@@ -87,24 +59,22 @@
 
         default_layer {
             bindings = <
-&kp Q      &kp L             &kp U         &kp COMMA       &kp PERIOD                                     &kp F        &kp W            &kp R        &kp Y              &kp P
-&kp E      &mt LEFT_SHIFT I  &mt LCTRL A   &mt LEFT_ALT O  &kp MINUS     &kp F3            &trans         &kp K        &mt RIGHT_ALT T  &mt RCTRL N  &mt RIGHT_SHIFT S  &lt 3 H
-&kp Z      &kp X             &kp C         &kp V           &kp LEFT_WIN  &lt 1 F3          &trans         &kp G        &kp D            &kp M        &kp J              &lt 2 B
-&kp RCTRL  &kp C_MUTE        &kp LEFT_ALT  &kp LEFT_GUI    &lt 3 SPACE   &lt 2 DELETE      &kp BACKSPACE  &lt 1 ENTER                                                   &kp LS(LG(N5))
+&kp Q       &kp L             &kp U         &kp COMMA       &kp PERIOD                                     &kp F        &kp W            &kp R        &kp Y              &kp P
+&kp E       &mt LEFT_SHIFT I  &mt LCTRL A   &mt LEFT_ALT O  &kp MINUS     &kp F3            &trans         &kp K        &mt RIGHT_ALT T  &mt RCTRL N  &mt RIGHT_SHIFT S  &lt 3 H
+&kp Z       &kp X             &kp C         &kp V           &kp LEFT_WIN  &lt 1 F3          &trans         &kp G        &kp D            &kp M        &kp J              &lt 2 B
+&kp C_MUTE  &kp LCTRL         &kp LEFT_ALT  &kp LEFT_GUI    &lt 3 SPACE   &lt 2 DELETE      &kp BACKSPACE  &lt 1 ENTER                                                   &kp LS(LG(N5))
             >;
 
-            sensor-bindings = <&encoder_scroll_v>;
+            sensor-bindings = <&encoder_msc_down_up>;
         };
 
         FUN_NUM {
             bindings = <
-&kp F4  &kp F1   &kp F2   &kp F3   &kp POUND                      &kp SLASH  &kp N7  &kp N8  &kp N9  &kp MINUS
-&kp F5  &kp F7   &kp F8   &kp F9   &kp PRCNT  &trans      &trans  &kp ASTRK  &kp N4  &kp N5  &kp N6  &kp PLUS
-&kp F6  &kp F10  &kp F11  &kp F12  &kp COLON  &trans      &trans  &kp N0     &kp N1  &kp N2  &kp N3  &kp EQUAL
-&trans  &trans   &trans   &trans   &trans     &trans      &trans  &trans                             &kp DOT
+&trans  &kp C_BRI_DN  &kp C_BRI_UP      &kp C_AC_DESKTOP_SHOW_ALL_WINDOWS  &kp POUND                      &kp SLASH  &kp N7  &kp N8  &kp N9  &kp MINUS
+&trans  &kp C_PREV    &kp C_PLAY_PAUSE  &kp C_NEXT                         &kp PRCNT  &trans      &trans  &kp ASTRK  &kp N4  &kp N5  &kp N6  &kp PLUS
+&trans  &kp C_MUTE    &kp C_VOL_DN      &kp C_VOL_UP                       &kp COLON  &trans      &trans  &kp N0     &kp N1  &kp N2  &kp N3  &kp EQUAL
+&trans  &trans        &trans            &trans                             &trans     &trans      &trans  &trans                             &kp DOT
             >;
-
-            sensor-bindings = <&encoder_volume>;
         };
 
         SYMBOL {
