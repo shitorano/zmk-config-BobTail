@@ -49,7 +49,10 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_MSC_DOWN_UP";
             #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
+            /* 縦スクロール方向を反転 */
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
             tap-ms = <20>;
         };
 
@@ -57,7 +60,10 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_SCROLL_V";
             #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
+            /* 縦スクロール方向を反転 */
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
             tap-ms = <20>;
         };
 
@@ -82,6 +88,7 @@
             label = "ENCODER_SCROLL_H";
             #sensor-binding-cells = <0>;
 
+            /* 横スクロールは現在の方向を維持 */
             /* 右回し→左、左回し→右 */
             /* 縦スクロール80に対して横スクロール160 */
             bindings = <&msc MOVE_X(-160)>, <&msc MOVE_X(160)>;
