@@ -45,53 +45,46 @@
 
     behaviors {
 
-        encoder_msc_down_up: encoder_msc_down_up {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_MSC_DOWN_UP";
-            #sensor-binding-cells = <0>;
-
-            /* 縦スクロール方向を反転 */
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            tap-ms = <20>;
-        };
-
+        /* 上下スクロール */
         encoder_scroll_v: encoder_scroll_v {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_SCROLL_V";
             #sensor-binding-cells = <0>;
 
-            /* 縦スクロール方向を反転 */
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
 
             tap-ms = <20>;
         };
 
+        /* 音量 */
         encoder_volume: encoder_volume {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_VOLUME";
             #sensor-binding-cells = <0>;
+
             bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
+
             tap-ms = <20>;
         };
 
+        /* Win + + / Win + - */
         encoder_win_zoom: encoder_win_zoom {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_WIN_ZOOM";
             #sensor-binding-cells = <0>;
+
             bindings = <&kp LG(PLUS)>, <&kp LG(MINUS)>;
+
             tap-ms = <20>;
         };
 
-        encoder_scroll_h: encoder_scroll_h {
+        /* 左右移動 */
+        encoder_move_h: encoder_move_h {
             compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_SCROLL_H";
+            label = "ENCODER_MOVE_H";
             #sensor-binding-cells = <0>;
 
-            /* 横スクロールは現在の方向を維持 */
-            /* 右回し→左、左回し→右 */
-            /* 縦スクロール80に対して横スクロール160 */
-            bindings = <&msc MOVE_X(-160)>, <&msc MOVE_X(160)>;
+            bindings = <&msc MOVE_X(160)>, <&msc MOVE_X(-160)>;
 
             tap-ms = <20>;
         };
@@ -108,7 +101,7 @@
 &kp C_MUTE  &kp LCTRL         &kp LEFT_ALT  &kp LEFT_GUI    &lt 3 SPACE   &lt 2 DELETE      &kp BACKSPACE  &lt 1 ENTER                                                   &kp LS(LG(N5))
             >;
 
-            sensor-bindings = <&encoder_msc_down_up>;
+            sensor-bindings = <&encoder_scroll_v>;
         };
 
         FUN_NUM {
@@ -130,7 +123,7 @@
 &trans     &trans        &trans    &trans        &trans     &trans      &trans  &trans                                             &trans
             >;
 
-            sensor-bindings = <&encoder_scroll_v>;
+            sensor-bindings = <&encoder_win_zoom>;
         };
 
         ARROW {
@@ -141,7 +134,7 @@
 &trans  &trans  &trans  &trans      &trans          &trans      &trans  &trans                                                                &trans
             >;
 
-            sensor-bindings = <&encoder_win_zoom>;
+            sensor-bindings = <&encoder_move_h>;
         };
 
         MOUSE {
@@ -163,7 +156,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
 
-            sensor-bindings = <&encoder_scroll_h>;
+            sensor-bindings = <&encoder_scroll_v>;
         };
 
         BLUETOOTH {
