@@ -73,7 +73,8 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENCODER_WIN_ZOOM";
             #sensor-binding-cells = <0>;
-            bindings = <&kp LG(SEMI)>, <&kp LG(MINUS)>;
+            /* 右回し→⌘-、左回し→⌘; */
+            bindings = <&kp LG(MINUS)>, <&kp LG(SEMI)>;
             tap-ms = <20>;
         };
 
@@ -161,7 +162,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans                          &trans        &trans        &trans        &trans        &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans      &trans        &bt BT_SEL 4  &trans        &trans        &trans
-&trans  &trans  &trans  &trans      &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans
+&trans  &trans  &trans  &trans  &trans      &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans
 &trans  &trans  &trans  &trans  &trans      &bt BT_CLR  &trans                                                  &trans
             >;
 
@@ -172,7 +173,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
 
